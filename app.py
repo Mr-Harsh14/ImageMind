@@ -77,7 +77,7 @@ if uploaded_file is not None:
     col1, col2 = st.columns(2)
     
     with col1:
-        st.image(image, caption='Uploaded Image', use_column_width=True)
+        st.image(image, caption='Uploaded Image', use_container_width=True)
     
     # Make prediction
     if model is not None:
@@ -86,10 +86,12 @@ if uploaded_file is not None:
                 # Preprocess the image
                 processed_image = preprocess_image(image)
                 
-                # Get prediction
+                # Get prediction and apply softmax
                 prediction = model.predict(processed_image)
-                predicted_class = class_names[np.argmax(prediction)]
-                confidence = float(np.max(prediction)) * 100
+                probabilities = tf.nn.softmax(prediction).numpy()[0]
+                
+                predicted_class = class_names[np.argmax(probabilities)]
+                confidence = float(np.max(probabilities)) * 100
                 
                 # Display results
                 st.markdown("<div class='prediction-box'>", unsafe_allow_html=True)
@@ -98,10 +100,10 @@ if uploaded_file is not None:
                 st.markdown(f"**Confidence:** {confidence:.2f}%")
                 
                 # Display top 3 predictions
-                top_3_indices = np.argsort(prediction[0])[-3:][::-1]
+                top_3_indices = np.argsort(probabilities)[-3:][::-1]
                 st.markdown("#### Top 3 Predictions:")
                 for idx in top_3_indices:
-                    st.markdown(f"- {class_names[idx].title()}: {prediction[0][idx]*100:.2f}%")
+                    st.markdown(f"- {class_names[idx].title()}: {probabilities[idx]*100:.2f}%")
                 st.markdown("</div>", unsafe_allow_html=True)
 
 # Add information about the model
