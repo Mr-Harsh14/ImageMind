@@ -3,15 +3,27 @@ import tensorflow as tf
 import numpy as np
 from PIL import Image
 import io
+import os
 
-# Set page config
-st.set_page_config(
-    page_title="Image Classifier",
-    page_icon="🔍",
-    layout="centered"
-)
+# Check if assets directory exists, if not create it
+if not os.path.exists('assets'):
+    os.makedirs('assets')
 
-# Custom CSS for better styling
+# Set page config with custom logo
+if os.path.exists('assets/logo.png'):
+    st.set_page_config(
+        page_title="Hazz Image Classifier",
+        page_icon="assets/hazz.png",
+        layout="centered"
+    )
+else:
+    st.set_page_config(
+        page_title="Hazz Image Classifier",
+        page_icon="🔍",
+        layout="centered"
+    )
+
+# Custom CSS for better styling - updated with logo colors
 st.markdown("""
     <style>
     .stApp {
@@ -19,23 +31,55 @@ st.markdown("""
         margin: 0 auto;
     }
     .upload-box {
-        border: 2px dashed #4CAF50;
+        border: 2px dashed #E86C52;  /* Orange color from logo */
         border-radius: 10px;
         padding: 20px;
         text-align: center;
         margin: 20px 0;
     }
     .prediction-box {
-        background-color: #f8f9fa;
+        background-color: #FFF8F6;  /* Light orange background */
         padding: 20px;
         border-radius: 10px;
         margin: 20px 0;
+        border: 1px solid #E86C52;
+    }
+    .title-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 2rem;
+    }
+    .logo-img {
+        width: 50px;
+        height: 50px;
+        margin-right: 10px;
+    }
+    h1 {
+        color: #E86C52 !important;
+    }
+    .stButton>button {
+        background-color: #E86C52;
+        color: white;
+    }
+    .stButton>button:hover {
+        background-color: #D55941;
+        color: white;
     }
     </style>
 """, unsafe_allow_html=True)
 
-# Title and description
-st.title("🖼️ Deep CNN Image Classifier")
+# Title and description with logo
+if os.path.exists('assets/logo.png'):
+    st.markdown("""
+        <div class="title-container">
+            <img src="data:image/png;base64,{}" class="logo-img">
+            <h1>Hazz Image Classifier</h1>
+        </div>
+    """.format(Image.open('assets/logo.png').tobytes()), unsafe_allow_html=True)
+else:
+    st.title("🖼️ Hazz Image Classifier")
+
 st.markdown("""
     This app uses a deep convolutional neural network trained on the CIFAR-10 dataset 
     to classify images into 10 different categories.
@@ -129,4 +173,4 @@ with st.expander("ℹ️ About the Model"):
 
 # Footer
 st.markdown("---")
-st.markdown("Made with ❤️ using Streamlit and TensorFlow") 
+st.markdown("Made with ❤️ by Hazz using Streamlit and TensorFlow") 
