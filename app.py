@@ -48,7 +48,7 @@ class_names = ['airplane', 'automobile', 'bird', 'cat', 'deer',
 @st.cache_resource
 def load_model():
     try:
-        model = tf.keras.models.load_model('notebook/model.h5')
+        model = tf.keras.models.load_model('model.h5')
         return model
     except:
         st.error("⚠️ Model file not found. Please ensure the model is trained and saved as 'model.h5'")
