@@ -32,7 +32,7 @@ else:
         layout="centered"
     )
 
-# Custom CSS for better styling - updated with logo colors
+# Custom CSS for better styling
 st.markdown("""
     <style>
     .stApp {
@@ -40,18 +40,19 @@ st.markdown("""
         margin: 0 auto;
     }
     .upload-box {
-        border: 2px dashed #E86C52;  /* Orange color from logo */
+        border: 2px dashed #E86C52;
         border-radius: 10px;
         padding: 20px;
         text-align: center;
         margin: 20px 0;
     }
     .prediction-box {
-        background-color: #FFF8F6;  /* Light orange background */
-        padding: 20px;
+        background-color: #FFF8F6;
+        padding: 25px;
         border-radius: 10px;
         margin: 20px 0;
         border: 1px solid #E86C52;
+        box-shadow: 0 2px 4px rgba(232, 108, 82, 0.1);
     }
     .title-container {
         display: flex;
@@ -74,6 +75,22 @@ st.markdown("""
     .stButton>button:hover {
         background-color: #D55941;
         color: white;
+    }
+    /* Hide the default upload text */
+    .st-emotion-cache-1erivf3 {
+        display: none;
+    }
+    .st-emotion-cache-1gulkj5 {
+        padding: 30px !important;
+        border: none !important;
+    }
+    [data-testid="stFileUploadDropzone"] {
+        border: none !important;
+        background: #FFF8F6;
+        padding: 20px;
+    }
+    .st-emotion-cache-1gulkj5:hover {
+        background: #FFE8E2;
     }
     </style>
 """, unsafe_allow_html=True)
@@ -124,7 +141,11 @@ model = load_model()
 
 # File uploader
 st.markdown("<div class='upload-box'>", unsafe_allow_html=True)
-uploaded_file = st.file_uploader("Choose an image...", type=['jpg', 'jpeg', 'png'])
+uploaded_file = st.file_uploader(
+    "Drop an image here or click to browse",
+    type=['jpg', 'jpeg', 'png'],
+    help="Supported formats: JPG, JPEG, PNG"
+)
 st.markdown("</div>", unsafe_allow_html=True)
 
 if uploaded_file is not None:
