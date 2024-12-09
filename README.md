@@ -13,6 +13,7 @@ A modern web application that uses a deep convolutional neural network to classi
 ## Categories
 
 The model can classify images into the following categories:
+
 - Airplane
 - Automobile
 - Bird
@@ -27,29 +28,33 @@ The model can classify images into the following categories:
 ## Installation
 
 1. Clone the repository:
+
 ```bash
 git clone https://github.com/yourusername/Deep-CNN-Image-Classifier.git
 cd Deep-CNN-Image-Classifier
 ```
 
 2. Install the required dependencies:
+
 ```bash
 pip install -r requirements.txt
 ```
 
-3. Train the model using the Jupyter notebook:
+1. Train the model using the Jupyter notebook:
+
 ```bash
 jupyter notebook notebook/Image\ Classification.ipynb
 ```
 
 4. Run the Streamlit app:
+
 ```bash
 streamlit run app.py
 ```
 
 ## Usage
 
-1. Open the web application in your browser (default: http://localhost:8501)
+1. Open the web application in your browser (default: <http://localhost:8501>)
 2. Upload an image using the drag-and-drop interface or file selector
 3. Wait for the model to process the image
 4. View the predictions and confidence scores
@@ -99,4 +104,3 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 - CIFAR-10 dataset
 - TensorFlow team
 - Streamlit community
- 
