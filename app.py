@@ -185,4 +185,4 @@ with st.expander("ℹ️ About the Model"):
 
 # Footer
 st.markdown("---")
-st.markdown("Made with ❤️ by Hazz using Streamlit and TensorFlow") 
+st.markdown("Made by Hazz using Streamlit and TensorFlow")
