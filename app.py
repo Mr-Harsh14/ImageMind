@@ -4,21 +4,30 @@ import numpy as np
 from PIL import Image
 import io
 import os
+import base64
+
+# Function to load and encode the image
+def encode_image(image_path):
+    if os.path.exists(image_path):
+        with open(image_path, "rb") as image_file:
+            encoded_string = base64.b64encode(image_file.read()).decode()
+        return encoded_string
+    return None
 
 # Check if assets directory exists, if not create it
 if not os.path.exists('assets'):
     os.makedirs('assets')
 
 # Set page config with custom logo
-if os.path.exists('assets/logo.png'):
+if os.path.exists('assets/hazz.png'):
     st.set_page_config(
-        page_title="Hazz Image Classifier",
+        page_title="Image Classifier",
         page_icon="assets/hazz.png",
         layout="centered"
     )
 else:
     st.set_page_config(
-        page_title="Hazz Image Classifier",
+        page_title="Image Classifier",
         page_icon="🔍",
         layout="centered"
     )
@@ -50,7 +59,7 @@ st.markdown("""
         justify-content: center;
         margin-bottom: 2rem;
     }
-    .logo-img {
+    .hazz-img {
         width: 50px;
         height: 50px;
         margin-right: 10px;
@@ -70,15 +79,18 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Title and description with logo
-if os.path.exists('assets/logo.png'):
-    st.markdown("""
+logo_path = 'assets/hazz.png'
+encoded_logo = encode_image(logo_path)
+
+if encoded_logo is not None:
+    st.markdown(f"""
         <div class="title-container">
-            <img src="data:image/png;base64,{}" class="logo-img">
-            <h1>Hazz Image Classifier</h1>
+            <img src="data:image/png;base64,{encoded_logo}" class="hazz-img">
+            <h1>Image Classifier</h1>
         </div>
-    """.format(Image.open('assets/logo.png').tobytes()), unsafe_allow_html=True)
+    """, unsafe_allow_html=True)
 else:
-    st.title("🖼️ Hazz Image Classifier")
+    st.title("🖼️ Image Classifier")
 
 st.markdown("""
     This app uses a deep convolutional neural network trained on the CIFAR-10 dataset 
