@@ -35,8 +35,7 @@ ENV/
 *.swp
 *.swo
 
-# Model files
-*.h5
+# Model files (except our main model)
 *.hdf5
 *.pkl
 *.pth
