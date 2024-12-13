@@ -242,6 +242,6 @@ with st.expander("ℹ️ About the Model"):
 st.markdown("---")
 st.markdown("""
     <div style='text-align: center; color: #666; font-size: 0.9em;'>
-        Made with ❤️ by Hazz using Streamlit and TensorFlow
+        Made by Hazz using Streamlit and TensorFlow
     </div>
 """, unsafe_allow_html=True)
