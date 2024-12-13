@@ -6,14 +6,19 @@ import io
 import os
 import base64
 
+# Get the absolute path to the directory containing this script
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+
 def get_base64_encoded_image(image_path):
-    with open(image_path, "rb") as image_file:
+    # Convert relative path to absolute path
+    abs_image_path = os.path.join(SCRIPT_DIR, image_path)
+    with open(abs_image_path, "rb") as image_file:
         return base64.b64encode(image_file.read()).decode('utf-8')
 
 # Set page config
 st.set_page_config(
     page_title="ImageMind Classifier",
-    page_icon="assets/hazz.png",
+    page_icon=os.path.join(SCRIPT_DIR, "assets/hazz.png"),
     layout="centered",
     initial_sidebar_state="collapsed"
 )
