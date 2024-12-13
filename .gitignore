@@ -67,5 +67,6 @@ Thumbs.db
 *.mov
 *.avi
 
-# But allow the logo
-!assets/logo.png
+# Allow all files in assets folder
+!assets/
+!assets/*
